@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chatbase Loader</title>
+  <script>
+    // Replace with your own logic (cookie, Firebase auth, etc.)
+    const userId     = sessionStorage.getItem('uid') || 'anon';
+    const metadata   = { name: 'Andrew Powers', email: 'andrew@example.com' };
+
+    fetch('https://script.google.com/macros/s/WEB_APP_ID/exec?uid=' + encodeURIComponent(userId))
+      .then(r => r.json())
+      .then(({user_id, user_hash}) => {
+        window.chatbase("identify", { user_id, user_hash, user_metadata: metadata });
+      });
+  </script>
+
+  <!-- Chatbase embed (widget flavour) -->
+  <script src="https://www.chatbase.co/embed.min.js"
+          chatbotId="YOUR_CHATBOT_ID"
+          defer></script>
+</head>
+<body></body>
+</html>
